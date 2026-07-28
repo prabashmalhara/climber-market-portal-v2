@@ -79,7 +79,7 @@ export default async function AdminDevicesPage() {
               devices.map((device) => (
                 <tr key={device.id}>
                   <td className="font-mono font-medium text-primary">{device.serial_number}</td>
-                  <td>{device.products?.name || "Unknown"}</td>
+                  <td>{(device.products as any)?.name || "Unknown"}</td>
                   <td className="text-secondary">{device.batch_id || "—"}</td>
                   <td>{formatDate(device.created_at)}</td>
                   <td>
