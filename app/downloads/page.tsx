@@ -73,7 +73,7 @@ export default async function CustomerDownloadsPage() {
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="px-2 py-1 bg-primary/10 text-primary text-xs font-bold rounded uppercase tracking-wider">
-                      {pkg.products?.name}
+                      {(pkg.products as any)?.name}
                     </span>
                     <span className="text-sm text-secondary font-mono">v{pkg.version}</span>
                   </div>

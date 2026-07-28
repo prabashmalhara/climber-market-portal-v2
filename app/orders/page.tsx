@@ -134,7 +134,7 @@ export default async function OrdersPage() {
                   <div key={item.id} className="order-item-row">
                     <div className="order-item-icon">📦</div>
                     <div className="order-item-details">
-                      <h4 className="order-item-name">{item.products?.name || "Unknown Product"}</h4>
+                      <h4 className="order-item-name">{(item.products as any)?.name || "Unknown Product"}</h4>
                       <p className="order-item-price">
                         ${item.unit_price.toFixed(2)} x {item.quantity}
                       </p>

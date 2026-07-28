@@ -61,12 +61,12 @@ export default async function MyDevicesPage() {
               <div className="flex gap-4 items-center">
                 <div className="w-16 h-16 bg-card border border-border rounded-lg flex items-center justify-center text-3xl shrink-0">
                   {/* Fallback emoji based on product name */}
-                  {reg.devices?.products?.name?.toLowerCase().includes('climber') ? '🧗' : 
-                   reg.devices?.products?.name?.toLowerCase().includes('basecamp') ? '⛺' : '📡'}
+                  {(reg.devices as any)?.products?.name?.toLowerCase().includes('climber') ? '🧗' : 
+                   (reg.devices as any)?.products?.name?.toLowerCase().includes('basecamp') ? '⛺' : '📡'}
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-primary mb-1">
-                    {reg.devices?.products?.name}
+                    {(reg.devices as any)?.products?.name}
                   </h3>
                   <p className="font-mono text-sm text-secondary mb-1">
                     {reg.devices?.serial_number}

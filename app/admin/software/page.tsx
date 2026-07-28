@@ -79,7 +79,7 @@ export default async function AdminSoftwarePage() {
               packages.map((pkg) => (
                 <tr key={pkg.id}>
                   <td className="font-medium text-primary">{pkg.name}</td>
-                  <td>{pkg.products?.name || "Unknown"}</td>
+                  <td>{(pkg.products as any)?.name || "Unknown"}</td>
                   <td className="font-mono text-sm">{pkg.version}</td>
                   <td className="text-secondary text-sm">{formatSize(pkg.file_size_bytes)}</td>
                   <td className="text-secondary text-sm">{formatDate(pkg.uploaded_at)}</td>
