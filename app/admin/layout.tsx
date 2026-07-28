@@ -8,21 +8,15 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const supabase = await createClient();
-
-  // 1. Get current logged-in user
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (authError || !user) {
     redirect("/login");
   }
-
-  // 2. Fetch their profile from the public.users table to check their role
   const { data: profile } = await supabase
     .from("users")
     .select("role")
     .eq("id", user.id)
     .single();
-
-  // 3. The Gatekeeper: If they aren't an admin, kick them back to the homepage
   if (!profile || profile.role !== "admin") {
     redirect("/");
   }

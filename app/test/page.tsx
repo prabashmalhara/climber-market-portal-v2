@@ -1,6 +1,4 @@
 import { createClient } from "@/lib/supabase/server";
-
-// This is a SERVER COMPONENT (the default in App Router).
 // It runs on the server, fetches data, then sends the final HTML to the browser.
 // The user never sees the Supabase query — it happens before the page loads.
 

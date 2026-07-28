@@ -5,8 +5,6 @@ import { revalidatePath } from "next/cache";
 
 export async function registerDevice(serialNumber: string) {
   const supabase = await createClient();
-
-  // 1. Ensure user is logged in
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (authError || !user) {
     return { success: false, error: "You must be logged in to register a device." };
@@ -15,8 +13,6 @@ export async function registerDevice(serialNumber: string) {
   if (!serialNumber || serialNumber.trim() === "") {
     return { success: false, error: "Please enter a valid serial number." };
   }
-
-  // 2. Look up the device by serial number
   const { data: device, error: deviceError } = await supabase
     .from("devices")
     .select("*")
@@ -26,13 +22,9 @@ export async function registerDevice(serialNumber: string) {
   if (deviceError || !device) {
     return { success: false, error: "Invalid serial number. Device not found." };
   }
-
-  // 3. Check if it's already registered
   if (device.status === "registered") {
     return { success: false, error: "This device is already registered." };
   }
-
-  // 4. Check if a registration record already exists (just to be completely safe)
   const { data: existingReg } = await supabase
     .from("device_registrations")
     .select("id")
@@ -42,8 +34,6 @@ export async function registerDevice(serialNumber: string) {
   if (existingReg) {
     return { success: false, error: "This device is already registered to an account." };
   }
-
-  // 5. Create the registration row (approved_by_admin defaults to false in the DB schema)
   const { error: regError } = await supabase
     .from("device_registrations")
     .insert({

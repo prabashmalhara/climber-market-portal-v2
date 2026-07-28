@@ -5,8 +5,6 @@ import { revalidatePath } from "next/cache";
 
 export async function placeOrder(items: { id: string; quantity: number; price: number }[]) {
   const supabase = await createClient();
-
-  // 1. Get the current user
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (authError || !user) {
     return { success: false, error: "You must be logged in to place an order." };
@@ -18,8 +16,6 @@ export async function placeOrder(items: { id: string; quantity: number; price: n
 
   // Calculate total amount
   const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  // 2. Insert into orders table
   const { data: order, error: orderError } = await supabase
     .from("orders")
     .insert({
@@ -35,8 +31,6 @@ export async function placeOrder(items: { id: string; quantity: number; price: n
     console.error("Order insertion failed:", orderError);
     return { success: false, error: "Failed to create order." };
   }
-
-  // 3. Insert into order_items table
   const orderItemsData = items.map((item) => ({
     order_id: order.id,
     product_id: item.id,

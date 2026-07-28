@@ -32,12 +32,8 @@ export default function UploadSoftwareForm({ products }: { products: Product[] }
     const name = formData.get("name") as string;
     const version = formData.get("version") as string;
     const description = formData.get("description") as string;
-
-    // 1. Generate a unique, safe filename
     const fileExt = file.name.split('.').pop();
     const fileName = `${productId}/${Date.now()}-v${version}.${fileExt}`;
-
-    // 2. Upload file directly from browser to Supabase Storage
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('software_releases')
       .upload(fileName, file, {
@@ -51,8 +47,6 @@ export default function UploadSoftwareForm({ products }: { products: Product[] }
       setUploading(false);
       return;
     }
-
-    // 3. Save metadata to the database via Server Action
     const result = await recordSoftwarePackage({
       productId,
       name,

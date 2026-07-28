@@ -3,14 +3,10 @@ import UploadSoftwareForm from "./client-upload";
 
 export default async function AdminSoftwarePage() {
   const supabase = await createClient();
-
-  // 1. Fetch products for the form dropdown
   const { data: products } = await supabase
     .from("products")
     .select("id, name")
     .order("name");
-
-  // 2. Fetch existing software packages
   const { data: packages, error } = await supabase
     .from("software_packages")
     .select(`

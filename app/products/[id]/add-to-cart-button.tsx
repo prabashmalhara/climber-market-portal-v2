@@ -2,8 +2,6 @@
 
 import { useCart } from "@/app/cart-context";
 import { useState } from "react";
-
-// This is a Client Component because it needs to respond to clicks
 // and update the React Context (Cart State).
 
 type Props = {

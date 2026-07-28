@@ -4,14 +4,10 @@ import Link from "next/link";
 
 export default async function MyDevicesPage() {
   const supabase = await createClient();
-
-  // 1. Ensure user is logged in
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (authError || !user) {
     redirect("/login");
   }
-
-  // 2. Fetch all devices registered to this user
   // Because of our RLS policies on device_registrations, we naturally only get their devices.
   const { data: registrations, error } = await supabase
     .from("device_registrations")

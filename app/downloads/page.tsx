@@ -4,14 +4,10 @@ import DownloadButton from "./download-button";
 
 export default async function CustomerDownloadsPage() {
   const supabase = await createClient();
-
-  // 1. Ensure user is logged in
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (authError || !user) {
     redirect("/login");
   }
-
-  // 2. Fetch available software packages
   // CRITICAL SECURITY FEATURE: Because we set up Row Level Security (RLS) on the 
   // software_packages table, this simple select query will AUTOMATICALLY only 
   // return packages if the customer has an approved device for that product!

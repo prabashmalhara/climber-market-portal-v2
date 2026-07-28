@@ -1,10 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-
-// This is a Server Component. It fetches data on the server before rendering.
-
-// Type definitions for our data
 type OrderItem = {
   id: string;
   quantity: number;
@@ -25,18 +21,12 @@ type Order = {
 
 export default async function OrdersPage() {
   const supabase = await createClient();
-
-  // 1. Verify the user is logged in
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   
   if (authError || !user) {
     // If not logged in, redirect them to login page
     redirect("/login");
   }
-
-  // 2. Fetch the user's orders along with the items and product details inside them
-  // We use Supabase's foreign key joining syntax here: `order_items(..., products(...))`
-  // RLS policies ensure we only get rows where user_id = auth.uid()
   const { data: orders, error } = await supabase
     .from("orders")
     .select(`
@@ -63,8 +53,6 @@ export default async function OrdersPage() {
       </div>
     );
   }
-
-  // Helper to format dates nicely
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -72,8 +60,6 @@ export default async function OrdersPage() {
       day: "numeric",
     });
   };
-
-  // Helper for status badge colors
   const getStatusClass = (status: string) => {
     switch (status) {
       case "pending": return "status-pending";

@@ -46,8 +46,6 @@ export default function OrderRow({ order }: { order: Order }) {
       month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
     });
   };
-
-  // Build a summary of items (e.g., "2x Climber Node, 1x App")
   const itemsSummary = order.order_items
     .map(item => `${item.quantity}x ${item.products.name}`)
     .join(", ");

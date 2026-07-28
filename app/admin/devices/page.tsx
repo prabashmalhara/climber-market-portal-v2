@@ -3,14 +3,10 @@ import AddDeviceForm from "./client-form";
 
 export default async function AdminDevicesPage() {
   const supabase = await createClient();
-
-  // 1. Fetch products for the dropdown in the Add Device form
   const { data: products } = await supabase
     .from("products")
     .select("id, name")
     .order("name");
-
-  // 2. Fetch all devices currently in the system
   const { data: devices, error } = await supabase
     .from("devices")
     .select(`

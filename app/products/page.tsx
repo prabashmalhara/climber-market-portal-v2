@@ -1,11 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import Image from "next/image";
-
-// This is a SERVER COMPONENT — it fetches data on the server,
 // then sends ready-made HTML to the browser. Fast and SEO-friendly.
-
-// Product type definition — describes the shape of a product row
 type Product = {
   id: string;
   name: string;
@@ -16,9 +12,6 @@ type Product = {
   image_url: string;
   is_active: boolean;
 };
-
-// Icon mapping — instead of placeholder images, we use themed icons
-// that match each product category. Looks intentional, not broken.
 const categoryIcons: Record<string, string> = {
   hardware: "📡",
   software: "💻",
