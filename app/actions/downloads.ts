@@ -2,6 +2,14 @@
 
 import { createClient } from "@/lib/supabase/server";
 
+/**
+ * Handles secure file downloads by generating temporary signed URLs for
+ * authorized customer software packages.
+ * 
+ * @module DownloadActions
+ */
+
+
 export async function getDownloadUrl(packageId: string) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();

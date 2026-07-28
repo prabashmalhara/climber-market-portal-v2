@@ -2,6 +2,16 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
+/**
+ * Root layout for the administrative dashboard.
+ * Implements a strict authorization gatekeeper, redirecting unauthorized
+ * users to the public application.
+ * 
+ * @component AdminLayout
+ * @param {React.ReactNode} children - The nested child routes to render.
+ */
+
+
 export default async function AdminLayout({
   children,
 }: {

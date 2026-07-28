@@ -3,6 +3,14 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
+/**
+ * Administrative server actions for managing orders, devices, and registrations.
+ * Requires an active session with administrator privileges.
+ * 
+ * @module AdminActions
+ */
+
+
 export async function updateOrderStatus(orderId: string, newStatus: string) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();

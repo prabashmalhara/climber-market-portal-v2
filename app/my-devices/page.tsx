@@ -2,6 +2,14 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
+/**
+ * Renders the hardware management dashboard for authenticated customers.
+ * Displays all devices registered to the current user.
+ * 
+ * @component MyDevicesPage
+ */
+
+
 export default async function MyDevicesPage() {
   const supabase = await createClient();
   const { data: { user }, error: authError } = await supabase.auth.getUser();

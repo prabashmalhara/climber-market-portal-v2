@@ -1,6 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+
+/**
+ * Renders the order history dashboard for authenticated customers.
+ * Fetches associated order metadata and related hardware items.
+ * 
+ * @component OrdersPage
+ */
+
 type OrderItem = {
   id: string;
   quantity: number;

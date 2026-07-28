@@ -3,6 +3,14 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
+/**
+ * Manages the hardware registration workflow, verifying device serial numbers
+ * and assigning ownership to the authenticated user.
+ * 
+ * @module DeviceRegistration
+ */
+
+
 export async function registerDevice(serialNumber: string) {
   const supabase = await createClient();
   const { data: { user }, error: authError } = await supabase.auth.getUser();

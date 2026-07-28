@@ -2,6 +2,14 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import DownloadButton from "./download-button";
 
+/**
+ * Renders the software distribution center for authenticated customers.
+ * Lists available firmware and client applications based on purchased hardware.
+ * 
+ * @component DownloadsPage
+ */
+
+
 export default async function CustomerDownloadsPage() {
   const supabase = await createClient();
   const { data: { user }, error: authError } = await supabase.auth.getUser();

@@ -3,6 +3,13 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
+/**
+ * Processes e-commerce transactions and creates associated order records.
+ * 
+ * @module OrderActions
+ */
+
+
 export async function placeOrder(items: { id: string; quantity: number; price: number }[]) {
   const supabase = await createClient();
   const { data: { user }, error: authError } = await supabase.auth.getUser();
