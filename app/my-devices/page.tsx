@@ -69,7 +69,7 @@ export default async function MyDevicesPage() {
                     {(reg.devices as any)?.products?.name}
                   </h3>
                   <p className="font-mono text-sm text-secondary mb-1">
-                    {reg.devices?.serial_number}
+                    {(reg.devices as any)?.serial_number}
                   </p>
                   <p className="text-xs text-muted">
                     Registered on {formatDate(reg.registered_at)}
