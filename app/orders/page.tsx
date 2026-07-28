@@ -101,7 +101,7 @@ export default async function OrdersPage() {
         </div>
       ) : (
         <div className="orders-list">
-          {orders.map((order: Order) => (
+          {orders.map((order: any) => (
             <div key={order.id} className="order-card">
               
               {/* Top part of the card: Order info */}
@@ -130,7 +130,7 @@ export default async function OrdersPage() {
 
               {/* Bottom part of the card: Items list */}
               <div className="order-items-list">
-                {order.order_items.map((item) => (
+                {order.order_items.map((item: any) => (
                   <div key={item.id} className="order-item-row">
                     <div className="order-item-icon">📦</div>
                     <div className="order-item-details">
